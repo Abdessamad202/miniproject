@@ -84,7 +84,7 @@ const Register = () => {
     try {
       // Send registration data to the backend
       console.log(user);
-      const response = await axios.post('https://288b-196-117-62-102.ngrok-free.app/application/api/register', formData);
+      const response = await axios.post('https://b323-196-117-62-102.ngrok-free.app/application/api/register', formData);
       // console.log(response.data.user);
 
       dispatch(In({user:response.data.user}))
