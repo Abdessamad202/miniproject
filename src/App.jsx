@@ -1,28 +1,34 @@
-import { Route } from "react-router"
-import { Routes } from "react-router"
-import Login from "./components/Login"
-import Register from "./components/Register"
-import { Home } from "./components/Home"
-import { useState } from "react"
+import { Route, Routes } from "react-router";
+import Login from "./components/guest/Login";
+import Register from "./components/guest/Register";
+import { Home } from "./components/Home";
+import { Info } from "./components/commun/Info";
+import { Users } from "./components/admin/Users";
+import { ProtectedLayout } from "./components/layout/protectedLayout";
 
-const App = ()=> {
-  const [state, setstate] = useState();
-  const handleclick = () => {
-    const token = window.sessionStorage.getItem("token")
-    setstate(token)
-  }
+const App = () => {
   return (
     <>
-      <button type="button" onClick={handleclick}>token</button>
-      {state}
-    <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/login" element={<Login/>}></Route>
-      <Route path="register" element={<Register />}></Route>
-    </Routes>
+      {/* Navbar always visible */}
 
+      {/* Route configuration */}
+      <Routes>
+        {/* Parent Route with Nested Routes */}
+        <Route element={<ProtectedLayout />}>
+          <Route path="/" element={<Home />}>
+            <Route path="home" element={<Info />} />
+            <Route path="users" element={<Users  />} />
+            <Route path="projects" element={<Info />} />
+          </Route>
+
+        </Route>
+
+        {/* Guest Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </>
+  );
+};
 
-  )
-}
-export {App}
+export { App };
