@@ -28,6 +28,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3000/application/api/login', { email, password });
       if (response.data.success) {
+        window.sessionStorage.setItem("token",response.data.token)
         dispatch(In({ user: response.data.user }));
         navigate('/');
       } else {
