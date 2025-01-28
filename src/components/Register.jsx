@@ -85,10 +85,9 @@ const Register = () => {
       // Send registration data to the backend
       console.log(user);
       const response = await axios.post('http://localhost:3000/application/api/register', formData);
-      // console.log(response.data.user);
+      console.log(response.data);
+      window.sessionStorage.setItem("token",response.data.token)
       dispatch(In({user:response.data.user}))
-      console.log(user);
-
       navigate('/')
       // Handle successful registration
     } catch (error) {
